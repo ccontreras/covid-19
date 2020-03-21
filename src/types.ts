@@ -1,4 +1,4 @@
-type OverallStats = {
+export type OverallStats = {
   currentConfirmedCount: number;
   confirmedCount: number;
   suspectedCount: number;
@@ -24,9 +24,7 @@ type OverallStats = {
   updateTime: number;
 };
 
-type NCovOverallResponse = {
+export type NCovOverallResponse = {
   results: OverallStats[];
   success: boolean;
 };
-
-export { NCovOverallResponse, OverallStats };
