@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const http = axios.create({
+const httpClient = axios.create({
   baseURL: "https://lab.isaaclin.cn/nCoV/api/"
 });
 
-export default http;
+export default httpClient;

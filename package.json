@@ -15,7 +15,6 @@
     "axios": "^0.19.2",
     "normalize.css": "^8.0.1",
     "react": "^16.13.1",
-    "react-content-loader": "^5.0.2",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "typescript": "^3.7.5"
@@ -42,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react": "^10.0.1",
     "@types/moxios": "^0.4.9",
     "moxios": "^0.4.0"
   }

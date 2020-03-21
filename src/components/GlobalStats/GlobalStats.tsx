@@ -37,26 +37,17 @@ const GlobalStats = () => {
             <Grid item xs={3}>
               <GlobalStatPaper
                 title="Contagios"
-                total={globalStats?.results[0].currentConfirmedCount}
+                total={globalStats?.infected}
               />
             </Grid>
             <Grid item xs={3}>
-              <GlobalStatPaper
-                title="Muertes"
-                total={globalStats?.results[0].deadCount}
-              />
+              <GlobalStatPaper title="Muertes" total={globalStats?.dead} />
             </Grid>
             <Grid item xs={3}>
-              <GlobalStatPaper
-                title="Criticos"
-                total={globalStats?.results[0].seriousCount}
-              />
+              <GlobalStatPaper title="Criticos" total={globalStats?.severe} />
             </Grid>
             <Grid item xs={3}>
-              <GlobalStatPaper
-                title="Curados"
-                total={globalStats?.results[0].curedCount}
-              />
+              <GlobalStatPaper title="Curados" total={globalStats?.healed} />
             </Grid>
           </>
         )}
