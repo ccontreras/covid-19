@@ -2,12 +2,12 @@ import React from "react";
 import Container from "@material-ui/core/Container";
 import { makeStyles } from "@material-ui/core/styles";
 import grey from "@material-ui/core/colors/grey";
-import { GlobalStats } from "./components/GlobalStats";
+import { OverallStats } from "./components/OverallStats";
 import "normalize.css";
 
 const useStyles = makeStyles({
   root: {
-    backgroundColor: grey[50],
+    backgroundColor: grey[100],
     width: "100vw",
     height: "100vh"
   }
@@ -18,7 +18,7 @@ function App() {
   return (
     <main className={classes.root}>
       <Container>
-        <GlobalStats />
+        <OverallStats />
       </Container>
     </main>
   );
