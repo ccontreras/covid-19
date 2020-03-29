@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
-import { NCovCovidApiImpl } from "../api";
+import { getGlobalStats } from "../api";
 
 type GlobalStatsState = {
   isLoading: boolean;
-  globalStats?: import("../api").GlobalStatsResponse;
+  overallStats?: import("../types").OverallType;
 };
 
 export const useGlobalStats = () => {
@@ -13,10 +13,8 @@ export const useGlobalStats = () => {
   });
 
   useEffect(() => {
-    const api = new NCovCovidApiImpl();
-    api
-      .getGlobalStats()
-      .then(globalStats => setState({ isLoading: false, globalStats }));
+    getGlobalStats()
+      .then(overallStats => setState({ isLoading: false, overallStats }));
   }, []);
 
   return state;

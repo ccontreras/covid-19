@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
 
 const GlobalStats = () => {
   const classes = useStyles();
-  const { isLoading, globalStats } = useGlobalStats();
+  const { isLoading, overallStats } = useGlobalStats();
 
   return (
     <section className={classes.root}>
@@ -27,8 +27,8 @@ const GlobalStats = () => {
       </Typography>
       <Grid container spacing={3}>
         {isLoading &&
-          new Array(4).fill(null).map(() => (
-            <Grid item xs={3}>
+          new Array(4).fill(null).map((_, index) => (
+            <Grid key={index} item xs={3}>
               <Skeleton variant="rect" width={266} height={71} />
             </Grid>
           ))}
@@ -37,17 +37,17 @@ const GlobalStats = () => {
             <Grid item xs={3}>
               <GlobalStatPaper
                 title="Contagios"
-                total={globalStats?.infected}
+                total={overallStats?.suspectedCount}
               />
             </Grid>
             <Grid item xs={3}>
-              <GlobalStatPaper title="Muertes" total={globalStats?.dead} />
+              <GlobalStatPaper title="Muertes" total={overallStats?.deadCount} />
             </Grid>
             <Grid item xs={3}>
-              <GlobalStatPaper title="Criticos" total={globalStats?.severe} />
+              <GlobalStatPaper title="Criticos" total={overallStats?.seriousCount} />
             </Grid>
             <Grid item xs={3}>
-              <GlobalStatPaper title="Curados" total={globalStats?.healed} />
+              <GlobalStatPaper title="Curados" total={overallStats?.curedCount} />
             </Grid>
           </>
         )}
