@@ -1,13 +1,14 @@
 import React from "react";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import { Skeleton } from "@material-ui/lab";
-import { Grid, Card, CardHeader, CardContent, Typography } from "@material-ui/core";
+import { Grid, Card, CardHeader, CardContent, Typography, Button } from "@material-ui/core";
 
 import { useOverallStats } from "../../hooks";
+import { calculateMortalityRate } from "../../utils";
 
 const styles = ({ palette, spacing, breakpoints }: Theme) => createStyles({
   root: {
-    paddingTop: spacing(4),
+    marginTop: spacing(4),
   },
   title: {
     marginBottom: spacing(4)
@@ -36,7 +37,7 @@ const useStyles = makeStyles(styles);
 
 const OverallStatItem = ({ title, total = 0, ...props }: { title: string; total?: number }) => {
   const classes = useStyles(props);
-  return (<Grid item xs={12} sm={4} className={classes.item}>
+  return (<Grid item xs={12} sm={3} className={classes.item}>
     <Typography variant="body2" component="p">
       {title}
       <Typography variant="h4" component="span" color="textPrimary" className={classes.itemTotal}>{total}</Typography>
@@ -46,7 +47,8 @@ const OverallStatItem = ({ title, total = 0, ...props }: { title: string; total?
 
 const OverallStats = () => {
   const classes = useStyles();
-  const { isLoading, isError, overallStats } = useOverallStats();
+  const { state, loadOverallStats } = useOverallStats();
+  const { isLoading, isError, overallStats } = state;
 
   return (
     <section aria-labelledby="Stats" className={classes.root}>
@@ -59,8 +61,8 @@ const OverallStats = () => {
           {!isLoading && !isError && (
             <Grid container spacing={3}>
               <OverallStatItem
-                title="Contagios"
-                total={overallStats?.suspectedCount}
+                title="Casos Confirmados"
+                total={overallStats?.confirmedCount}
               />
               <OverallStatItem
                 title="Muertes"
@@ -70,9 +72,18 @@ const OverallStats = () => {
                 title="Curados"
                 total={overallStats?.curedCount}
               />
+              <OverallStatItem
+                title="Mortalidad %"
+                total={calculateMortalityRate(overallStats?.deadCount || 0, overallStats?.confirmedCount || 0)}
+              />
             </Grid>
           )}
-          {isError && <Typography variant="body1" component="p">Something went wrong...</Typography>}
+          {isError && (
+            <>
+              <Typography variant="body1" component="p">Something went wrong...</Typography>
+              <Button color="secondary" onClick={loadOverallStats}>Retry</Button>
+            </>
+          )}
         </CardContent>
       </Card>
     </section>

@@ -1,0 +1,1 @@
+export const calculateMortalityRate = (dead: number, confirmed: number): number => Math.floor((dead / confirmed) * 100);
